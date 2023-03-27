@@ -92,16 +92,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 obfuscatedElements.forEach(element => {
     element.setAttribute("data-original", element.innerText)
 
-    let innerText = element.innerText
-
-    element.innerHTNL = "";
-
-    for(let i = 0; i < innerText.length; i++){
-        let span = document.createElement("span")
-        span.innerText = innerText[i]
-        element.appendChild(span)
-    }
-
     obfsLetter(element, 0, 10)
     element.addEventListener("click", eventListenerFunction)
 });
@@ -112,20 +102,15 @@ function eventListenerFunction(event){
     element.removeEventListener("click", eventListenerFunction)
 }
 
-// function placeLetter(element, i, symbol){
-//     let innerText = element.innerText
-//     innerText = innerText.split("")
-//     innerText[i] = symbol
-//     let text = ''
-//     innerText.forEach(element => {
-//         text += element
-//     })
-//     element.innerText = text;
-// }
-
 function placeLetter(element, i, symbol){
-    let span = element.childNodes[i];
-    span.innerHTML = symbol;
+    let innerText = element.innerText
+    innerText = innerText.split("")
+    innerText[i] = symbol
+    let text = ''
+    innerText.forEach(element => {
+        text += element
+    })
+    element.innerText = text;
 }
 
 function obfsLetter(element, i, timeout = 50){
